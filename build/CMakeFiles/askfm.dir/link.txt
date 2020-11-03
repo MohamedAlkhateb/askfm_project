@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/askfm.dir/src/askfm.cpp.o  -o askfm  /usr/lib/x86_64-linux-gnu/libsqlite3.so libuser.a 

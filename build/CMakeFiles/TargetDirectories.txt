@@ -1,0 +1,4 @@
+/mnt/c/Users/alkha/OneDrive/Desktop/askfm_project/build/CMakeFiles/edit_cache.dir
+/mnt/c/Users/alkha/OneDrive/Desktop/askfm_project/build/CMakeFiles/rebuild_cache.dir
+/mnt/c/Users/alkha/OneDrive/Desktop/askfm_project/build/CMakeFiles/askfm.dir
+/mnt/c/Users/alkha/OneDrive/Desktop/askfm_project/build/CMakeFiles/user.dir

@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/mnt/c/Users/alkha/OneDrive/Desktop/askfm_project/src/user/user.cpp
+user.h
+/mnt/c/Users/alkha/OneDrive/Desktop/askfm_project/src/user/user.h
+
+/mnt/c/Users/alkha/OneDrive/Desktop/askfm_project/src/user/user.h
+iostream
+-
+string
+-
+fstream
+-
+exception
+-
+cstring
+-
+regex
+-
+sqlite3.h
+-
+vector
+-
+
