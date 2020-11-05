@@ -1,5 +1,4 @@
 #include "user/user.h"
-#include <sqlite3.h>
 using namespace std;
 
 int main()
