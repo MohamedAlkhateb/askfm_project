@@ -66,10 +66,8 @@ void User::registerUser()
 {
     sqlite3 *db;
     char *zErrorMessage = 0;
-    int rc;
-    string sql;
 
-    rc = sqlite3_open("/mnt/c/Users/alkha/OneDrive/Desktop/askfm_project/build/askfm.db", &db);
+    int rc = sqlite3_open("/mnt/c/Users/alkha/OneDrive/Desktop/askfm_project/build/askfm.db", &db);
 
     if (rc)
     {
@@ -77,7 +75,7 @@ void User::registerUser()
         return;
     }
 
-    sql = "INSERT INTO users (name,email,password,anonymous) VALUES (" + serialize() + ")";
+    string sql = "INSERT INTO users (name,email,password,anonymous) VALUES (" + serialize() + ")";
     rc = sqlite3_exec(db, sql.c_str(), 0, 0, &zErrorMessage);
 
     if (rc != SQLITE_OK)
@@ -91,11 +89,9 @@ void User::login(string e, string p)
 {
     sqlite3 *db;
     char *zErrorMessage = 0;
-    int rc;
-    string sql;
     vector<string> data = {"null"};
 
-    rc = sqlite3_open("/mnt/c/Users/alkha/OneDrive/Desktop/askfm_project/build/askfm.db", &db);
+    int rc = sqlite3_open("/mnt/c/Users/alkha/OneDrive/Desktop/askfm_project/build/askfm.db", &db);
 
     if (rc)
     {
@@ -103,7 +99,7 @@ void User::login(string e, string p)
         return;
     }
 
-    sql = "SELECT * FROM users WHERE email = '" + e + "' AND password = '" + p + "'";
+    string sql = "SELECT * FROM users WHERE email = '" + e + "' AND password = '" + p + "'";
     rc = sqlite3_exec(db, sql.c_str(), callback, (void *)&data, &zErrorMessage);
 
     if (rc != SQLITE_OK)
