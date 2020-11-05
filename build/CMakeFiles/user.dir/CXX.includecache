@@ -6,6 +6,16 @@
 
 #IncludeRegexTransform: 
 
+/mnt/c/Users/alkha/OneDrive/Desktop/askfm_project/src/database/database.h
+sqlite3.h
+-
+iostream
+-
+
+/mnt/c/Users/alkha/OneDrive/Desktop/askfm_project/src/question/questions.h
+string
+-
+
 /mnt/c/Users/alkha/OneDrive/Desktop/askfm_project/src/user/user.cpp
 user.h
 /mnt/c/Users/alkha/OneDrive/Desktop/askfm_project/src/user/user.h
@@ -26,5 +36,9 @@ regex
 sqlite3.h
 -
 vector
+-
+/mnt/c/Users/alkha/OneDrive/Desktop/askfm_project/src/database/database.h
+-
+/mnt/c/Users/alkha/OneDrive/Desktop/askfm_project/src/question/questions.h
 -
 

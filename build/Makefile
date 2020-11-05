@@ -163,6 +163,33 @@ src/askfm.cpp.s:
 	$(MAKE) -f CMakeFiles/askfm.dir/build.make CMakeFiles/askfm.dir/src/askfm.cpp.s
 .PHONY : src/askfm.cpp.s
 
+src/database/database.o: src/database/database.cpp.o
+
+.PHONY : src/database/database.o
+
+# target to build an object file
+src/database/database.cpp.o:
+	$(MAKE) -f CMakeFiles/user.dir/build.make CMakeFiles/user.dir/src/database/database.cpp.o
+.PHONY : src/database/database.cpp.o
+
+src/database/database.i: src/database/database.cpp.i
+
+.PHONY : src/database/database.i
+
+# target to preprocess a source file
+src/database/database.cpp.i:
+	$(MAKE) -f CMakeFiles/user.dir/build.make CMakeFiles/user.dir/src/database/database.cpp.i
+.PHONY : src/database/database.cpp.i
+
+src/database/database.s: src/database/database.cpp.s
+
+.PHONY : src/database/database.s
+
+# target to generate assembly for a file
+src/database/database.cpp.s:
+	$(MAKE) -f CMakeFiles/user.dir/build.make CMakeFiles/user.dir/src/database/database.cpp.s
+.PHONY : src/database/database.cpp.s
+
 src/user/user.o: src/user/user.cpp.o
 
 .PHONY : src/user/user.o
@@ -203,6 +230,9 @@ help:
 	@echo "... src/askfm.o"
 	@echo "... src/askfm.i"
 	@echo "... src/askfm.s"
+	@echo "... src/database/database.o"
+	@echo "... src/database/database.i"
+	@echo "... src/database/database.s"
 	@echo "... src/user/user.o"
 	@echo "... src/user/user.i"
 	@echo "... src/user/user.s"

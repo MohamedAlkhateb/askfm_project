@@ -1,2 +1,2 @@
-/usr/bin/ar qc libuser.a  CMakeFiles/user.dir/src/user/user.cpp.o
+/usr/bin/ar qc libuser.a  CMakeFiles/user.dir/src/user/user.cpp.o CMakeFiles/user.dir/src/database/database.cpp.o
 /usr/bin/ranlib libuser.a
