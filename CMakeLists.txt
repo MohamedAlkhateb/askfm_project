@@ -4,6 +4,7 @@ project("AskFM")
 
 add_library(user
     src/user/user.cpp
+    src/database/database.cpp
 )
 
 add_executable(askfm

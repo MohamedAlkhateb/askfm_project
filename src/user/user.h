@@ -9,10 +9,12 @@
 #include <regex>
 #include <sqlite3.h>
 #include <vector>
+#include "/mnt/c/Users/alkha/OneDrive/Desktop/askfm_project/src/database/database.h"
+#include "/mnt/c/Users/alkha/OneDrive/Desktop/askfm_project/src/question/questions.h"
 
 using namespace std;
 
-class User
+class User : public DataBase, public Questions
 {
 
 public:
@@ -30,7 +32,7 @@ public:
 
     void registerUser();
     void login(string, string);
-    void askMe();
+    void askQuestion(string);
     void printQuestionsToMe();
     string serialize();
     void deserialize(string);

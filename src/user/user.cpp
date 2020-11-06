@@ -1,5 +1,5 @@
 #include "user.h"
-static int callback(void *data, int c_num, char **c_vals, char **c_names)
+static int callbackReturnData(void *data, int c_num, char **c_vals, char **c_names)
 {
     vector<string> *storeData = (vector<string> *)data;
     for (int i = 0; i < c_num; i++)
@@ -8,6 +8,14 @@ static int callback(void *data, int c_num, char **c_vals, char **c_names)
     }
     return 0;
 }
+
+static int callback(void *data, int c_num, char **c_vals, char **c_names)
+{
+    int *anonymous = (int *)data;
+    *(int *)data = **c_vals - '0';
+    return 0;
+}
+
 User::User(string n, string pass, string email, bool a)
 {
     setName(n);
@@ -64,53 +72,44 @@ bool User::getAnonymous()
 
 void User::registerUser()
 {
-    sqlite3 *db;
-    char *zErrorMessage = 0;
-
-    int rc = sqlite3_open("/mnt/c/Users/alkha/OneDrive/Desktop/askfm_project/build/askfm.db", &db);
-
-    if (rc)
-    {
-        cerr << "Can't open database: " << sqlite3_errmsg(db) << endl;
-        return;
-    }
 
     string sql = "INSERT INTO users (name,email,password,anonymous) VALUES (" + serialize() + ")";
-    rc = sqlite3_exec(db, sql.c_str(), 0, 0, &zErrorMessage);
-
-    if (rc != SQLITE_OK)
-    {
-        cerr << "SQL error: " << zErrorMessage << endl;
-    }
-    sqlite3_close(db);
-}
-
-void User::login(string e, string p)
-{
-    sqlite3 *db;
-    char *zErrorMessage = 0;
-    vector<string> data = {"null"};
-
-    int rc = sqlite3_open("/mnt/c/Users/alkha/OneDrive/Desktop/askfm_project/build/askfm.db", &db);
-
-    if (rc)
-    {
-        cerr << "Can't open database: " << sqlite3_errmsg(db) << endl;
-        return;
-    }
-
-    string sql = "SELECT * FROM users WHERE email = '" + e + "' AND password = '" + p + "'";
-    rc = sqlite3_exec(db, sql.c_str(), callback, (void *)&data, &zErrorMessage);
+    char *zErrorMessage;
+    int rc = sqlite3_exec(dbUsers, sql.c_str(), 0, 0, &zErrorMessage);
 
     if (rc != SQLITE_OK)
     {
         cerr << "SQL error : " << zErrorMessage << endl;
         sqlite3_free(zErrorMessage);
+        return;
+    }
+}
+
+void User::login(string e, string p)
+{
+    vector<string> data;
+
+    int rc = sqlite3_open("/mnt/c/Users/alkha/OneDrive/Desktop/askfm_project/build/askfm.db", &dbUsers);
+
+    if (rc)
+    {
+        cerr << "Can't open database: " << sqlite3_errmsg(dbUsers) << endl;
+        return;
     }
 
-    if (data.back() == "null")
+    string sql = "SELECT * FROM users WHERE email = '" + e + "' AND password = '" + p + "'";
+    char *zErrorMessage = 0;
+    rc = sqlite3_exec(dbUsers, sql.c_str(), callbackReturnData, (void *)&data, &zErrorMessage);
+
+    if (rc != SQLITE_OK)
     {
-        sqlite3_close(db);
+        cerr << "SQL error : " << zErrorMessage << endl;
+        sqlite3_free(zErrorMessage);
+        return;
+    }
+
+    if (data.empty())
+    {
         throw invalid_argument("email or password are wrong");
         return;
     }
@@ -122,86 +121,80 @@ void User::login(string e, string p)
     data.pop_back();
     name = data.back();
     data.pop_back();
-
-    sqlite3_close(db);
 }
 
-void User::askMe()
+void User::askQuestion(string reciver)
 {
-    /*     int userId;
-
-    do{
-        cout << "Enter user id or -1 to cancel ";
-        cin >> userId;
-        if ( userId == -1 ){
-            return;
-        }
-        else if ( userId <= 0 )
-            cout << "user id must be greater than zero\n";
-    } while( userId <= 0 );
-    
-    if ( userId == id ){
-        cout << "you cannot ask yourself" << endl;
+    if (email == reciver)
+    {
+        cout << "You cannot ask your self\n";
         return;
     }
-    fstream userFile( "userFile.txt", ios::in );
-    if ( !userFile )
-        cerr << "Cannot open the user file";
-    char line[50];
-    
-    
-    regex reg("(\\d),(\\w*),(\\w*),(\\w*@\\w*\\.\\w*),(\\d)");
-
-    while ( userFile.getline( line, 50 ) ){
-        string lineString;
-        smatch matches;
-        lineString = line;
-        regex_search( lineString, matches, reg );
-        if ( stoi( matches.str() ) == userId ){
-            fstream questionsFile( "questions.txt", ios::out | ios::app );
-            if ( !questionsFile )
-                cerr << "Cannot open the question file";
-            fstream metaFile( "metadata.txt", ios::in );
-            if ( !metaFile )
-                cerr << "Cannot open the metadata file";
-            string qusetion;
-            cout << "Enter qusetion text: ";
-            cin >> qusetion;
-            regex reg( "(\\d) (\\d)" );
-            metaFile.getline( line, 50 );
-            lineString = line;
-            metaFile.close();
-            regex_search( lineString, matches, reg );
-            questionsFile << stoi( matches.str( 2 ) ) + 1 << ',' << qusetion << ',' << id << ',' << userId << endl;
-            questionsFile.close();
-            metaFile.open( "metadata.txt", ios::out );
-            if ( !metaFile )
-                cerr << "Cannot open metadata file";
-            metaFile << matches.str( 1 ) << " " << stoi( matches.str( 2 ) ) + 1;
-            metaFile.close();
-            return;
-        }
+    string sql = "select anonymous from users where email = '" + reciver + "'";
+    char *zErrorMessage = 0;
+    int anonymousUser = -1;
+    int rc = sqlite3_exec(dbUsers, sql.c_str(), callback, (void *)&anonymousUser, &zErrorMessage);
+    if (rc != SQLITE_OK)
+    {
+        cerr << "SQL error : " << zErrorMessage << endl;
+        sqlite3_free(zErrorMessage);
+        return;
     }
-    cout << "no matches"; */
+    if (anonymousUser == -1)
+    {
+        throw invalid_argument("There no user with this email");
+        return;
+    }
+    char message[50];
+    cout << "Enter the message: ";
+    cin.getline(message, 50);
+    sql = "insert into questions (sender,reciver,message,anonymous) values ('" +
+          email + "'" + ",'" + reciver + "','" + message + "','" + to_string(anonymousUser) + "')";
+    rc = sqlite3_exec(dbQuestions, sql.c_str(), 0, 0, &zErrorMessage);
+    if (rc != SQLITE_OK)
+    {
+        cerr << "SQL error : " << zErrorMessage << endl;
+        sqlite3_free(zErrorMessage);
+        return;
+    }
 }
 
 void User::printQuestionsToMe()
 {
-    /*     fstream questionsFile( "questions.txt", ios::in );
-    if ( !questionsFile )
-        cerr << "Cannot open the question file";
-    char line[ 100 ];//i don't know how many charcter
-    regex reg( "(\\d),(\\w*),(\\d),(\\d)");
-    while( questionsFile.getline( line, 100 ) ){
-        smatch matches;
-        string lineString;
-        lineString = line;
-        regex_search( lineString, matches, reg );
-        if ( stoi( matches.str( 4 ) ) == id ){
-            cout << "Question ID (" << matches.str( 1 ) <<
-                ") From user id(" << matches.str( 3 ) << ")\t" << matches.str( 2 ) << endl;
+    string sql = "select * from questions where reciver = '" + email + "'";
+    vector<string> data;
+
+    char *zErrorMessage;
+    int rc = sqlite3_exec(dbQuestions, sql.c_str(), callbackReturnData, (void *)&data, &zErrorMessage);
+    if (rc != SQLITE_OK)
+    {
+        cerr << "SQL error : " << zErrorMessage << endl;
+        sqlite3_free(zErrorMessage);
+        return;
+    }
+    while (!data.empty())
+    {
+        anonymousQuestion = stoi(data.back());
+        data.pop_back();
+        message = data.back();
+        data.pop_back();
+        reciver = data.back();
+        data.pop_back();
+        sender = data.back();
+        data.pop_back();
+        idQuestion = stoi(data.back());
+        data.pop_back();
+        cout << "Question ID: " << idQuestion;
+        if (anonymousQuestion == 1)
+        {
+            cout << " from anonymous: ";
         }
-    } */
+        else
+        {
+            cout << " from " << sender << ": ";
+        }
+        cout << message << endl;
+    }
 }
 
 string User::serialize()
@@ -211,12 +204,11 @@ string User::serialize()
 
 void User::deserialize(string matchResult)
 {
-    /*     regex reg( "(\\d),(\\w*),(\\w*),(\\w*),(\\d)" );
+    regex reg("(\\w*),(\\w*),(\\w*),(\\d)");
     smatch matches;
-    regex_search( matchResult, matches, reg );
-    id = stoi( matches.str( 1 ) );
-    name = matches.str( 2 );
-    password = matches.str( 3 );
-    email = matches.str( 4 );
-    anonymous = stoi( matches.str( 5 ) ); */
+    regex_search(matchResult, matches, reg);
+    name = matches.str(2);
+    password = matches.str(3);
+    email = matches.str(4);
+    anonymous = stoi(matches.str(5));
 }
