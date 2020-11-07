@@ -36,9 +36,11 @@ public:
     void login(string, string);
     void askQuestion(string);
     void printQuestionsToMe();
+    void answerQuestion(int);
+
+protected:
     string serialize();
     void deserialize(string);
-    void answerQuestion(int);
     User returnUser(char **);
     void rest(User &);
 
