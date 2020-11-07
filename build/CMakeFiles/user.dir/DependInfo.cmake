@@ -5,6 +5,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "/mnt/c/Users/alkha/OneDrive/Desktop/askfm_project/src/database/database.cpp" "/mnt/c/Users/alkha/OneDrive/Desktop/askfm_project/build/CMakeFiles/user.dir/src/database/database.cpp.o"
+  "/mnt/c/Users/alkha/OneDrive/Desktop/askfm_project/src/question/questions.cpp" "/mnt/c/Users/alkha/OneDrive/Desktop/askfm_project/build/CMakeFiles/user.dir/src/question/questions.cpp.o"
   "/mnt/c/Users/alkha/OneDrive/Desktop/askfm_project/src/user/user.cpp" "/mnt/c/Users/alkha/OneDrive/Desktop/askfm_project/build/CMakeFiles/user.dir/src/user/user.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "Clang")

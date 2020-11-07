@@ -2,14 +2,17 @@
 #define QUESTIONS_H
 
 #include <string>
+#include <iostream>
 
 using namespace std;
 
 class Questions
 {
 public:
-    void askMe();
-    void printQuestionsToMe();
+    Questions(char **);
+    Questions() {}
+
+    void restQuestion(Questions &);
 
 protected:
     int idQuestion;

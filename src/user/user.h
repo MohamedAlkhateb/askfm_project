@@ -19,6 +19,8 @@ class User : public DataBase, public Questions
 
 public:
     User(string, string, string, bool);
+    User(char **);
+    User() {}
 
     void setName(string n);
     void setPassword(string pass);
@@ -36,6 +38,9 @@ public:
     void printQuestionsToMe();
     string serialize();
     void deserialize(string);
+    void answerQuestion(int);
+    User returnUser(char **);
+    void rest(User &);
 
 private:
     string name;

@@ -83,19 +83,34 @@ CMakeFiles/user.dir/src/database/database.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/user.dir/src/database/database.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/alkha/OneDrive/Desktop/askfm_project/src/database/database.cpp -o CMakeFiles/user.dir/src/database/database.cpp.s
 
+CMakeFiles/user.dir/src/question/questions.cpp.o: CMakeFiles/user.dir/flags.make
+CMakeFiles/user.dir/src/question/questions.cpp.o: ../src/question/questions.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/alkha/OneDrive/Desktop/askfm_project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/user.dir/src/question/questions.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/user.dir/src/question/questions.cpp.o -c /mnt/c/Users/alkha/OneDrive/Desktop/askfm_project/src/question/questions.cpp
+
+CMakeFiles/user.dir/src/question/questions.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/user.dir/src/question/questions.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/alkha/OneDrive/Desktop/askfm_project/src/question/questions.cpp > CMakeFiles/user.dir/src/question/questions.cpp.i
+
+CMakeFiles/user.dir/src/question/questions.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/user.dir/src/question/questions.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/alkha/OneDrive/Desktop/askfm_project/src/question/questions.cpp -o CMakeFiles/user.dir/src/question/questions.cpp.s
+
 # Object files for target user
 user_OBJECTS = \
 "CMakeFiles/user.dir/src/user/user.cpp.o" \
-"CMakeFiles/user.dir/src/database/database.cpp.o"
+"CMakeFiles/user.dir/src/database/database.cpp.o" \
+"CMakeFiles/user.dir/src/question/questions.cpp.o"
 
 # External object files for target user
 user_EXTERNAL_OBJECTS =
 
 libuser.a: CMakeFiles/user.dir/src/user/user.cpp.o
 libuser.a: CMakeFiles/user.dir/src/database/database.cpp.o
+libuser.a: CMakeFiles/user.dir/src/question/questions.cpp.o
 libuser.a: CMakeFiles/user.dir/build.make
 libuser.a: CMakeFiles/user.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/c/Users/alkha/OneDrive/Desktop/askfm_project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX static library libuser.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/c/Users/alkha/OneDrive/Desktop/askfm_project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX static library libuser.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/user.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/user.dir/link.txt --verbose=$(VERBOSE)
 

@@ -4,6 +4,9 @@
 CMakeFiles/user.dir/src/database/database.cpp.o: ../src/database/database.cpp
 CMakeFiles/user.dir/src/database/database.cpp.o: ../src/database/database.h
 
+CMakeFiles/user.dir/src/question/questions.cpp.o: ../src/question/questions.cpp
+CMakeFiles/user.dir/src/question/questions.cpp.o: ../src/question/questions.h
+
 CMakeFiles/user.dir/src/user/user.cpp.o: ../src/database/database.h
 CMakeFiles/user.dir/src/user/user.cpp.o: ../src/question/questions.h
 CMakeFiles/user.dir/src/user/user.cpp.o: ../src/user/user.cpp
