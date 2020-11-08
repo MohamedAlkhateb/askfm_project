@@ -224,14 +224,13 @@ void User::answerQuestion(int questionID)
     if (data == false)
     {
         throw invalid_argument("No question with this id for you!");
-        cout << "here" << endl;
         return;
     }
-    string answer;
+    char answer[50];
     cout << "Enter the answer: ";
-    cin >> answer;
-    sql = "INSERT INTO questions (answer) VALUES ('" + answer + "') where id = " + to_string(questionID);
-    cout << sql << endl;
+    cin.get();
+    cin.getline(answer, 50);
+    sql = "update questions set answer ='" + (string)answer + "' where id = '" + to_string(questionID) + "'";
     rc = sqlite3_exec(dbQuestions, sql.c_str(), 0, 0, &zErrorMessage);
     if (rc != SQLITE_OK)
     {
